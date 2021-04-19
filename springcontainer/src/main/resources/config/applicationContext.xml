@@ -1,7 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-
+	<!-- bean 등록 -->
+	<!-- 등록된 객체는 SingleTon : 단일 객체 유지 -->
+	<bean id="user" name="member" class="springcontainer.User" />
+	
+	<bean id="user3" class="springcontainer.User" />
+	
+	<!-- 생성자를 활용한 bean의 생성 -->
+	<!--  User user4 = new User(1, "짱구") -->
+	<bean id="user4" class="springcontainer.User">
+		<constructor-arg type="java.lang.Long" index="0" value="1" />
+		<constructor-arg type="java.lang.String" index="1" value="짱구" />
+	</bean>
+	
+	<!-- Setter를 활용한 bean의 생성 -->
+	<!--
+		User user5 = new User();
+		user5.setNo(2);
+		user5.setName("맹구");
+	 -->
+	<bean id="user5" class="springcontainer.User">
+		<property name="no" value="2" />
+		<property name="name" value="맹구" />
+	</bean>
+	
+	<!-- Dependency Injection -->
+	<bean id="friend" class="springcontainer.Friend">
+		<constructor-arg value="철수" />
+	</bean>
+	
+	<bean id="user6" class="springcontainer.User">
+		<property name="no" value="3" />
+		<property name="name" value="유리" />
+		
+		<!-- 참조 객체를 주입할 때에는 ref -->
+		<property name="friend" ref="friend" />
+	</bean>
+	
+	<!-- 집합 객체의 주입: list, set, map -->
+	<bean id="user7" class="springcontainer.User">
+		<property name="no" value="4" />
+		<property name="name" value="짱구" />
+		<property name="friend" ref="friend" />
+		
+		<!-- 집합 객체(list) -->
+		<property name="friends">
+			<list>
+				<value>철수</value>
+				<value>유리</value>
+				<value>맹구</value>
+			</list>
+		</property>
+	</bean>
 </beans>
