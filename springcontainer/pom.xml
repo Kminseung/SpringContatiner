@@ -4,6 +4,18 @@
   <artifactId>springcontainer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <build>
+	<plugins>
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+				<release>11</release>
+			</configuration>
+		</plugin>
+	</plugins>
+   </build>
+	
   <!-- 의존성 -->
   <dependencies>
   	<!-- Spring Context -->
